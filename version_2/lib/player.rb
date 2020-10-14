@@ -43,6 +43,7 @@ class HumanPlayer < Player#classe pour les joueurs humains
 		return "#{@name} à #{@life_points} point de vie et une arme de niveau #{@weapon_level}"	
 	end
 
+
 	def compute_damage #point d'attaque
 		return rand(1..6) * @weapon_level
 	end
@@ -56,7 +57,7 @@ class HumanPlayer < Player#classe pour les joueurs humains
 			@weapon_level = @dice
 			puts " Youhou! elle est meilleur que ton arme actuelle : tu la prends!"
 		else
-			puts "... Elle est éclaté au sol frère !"
+			puts "... Elle est éclatée au sol frère !"
 		end
 
 	end
@@ -64,26 +65,31 @@ class HumanPlayer < Player#classe pour les joueurs humains
 	def search_health_pack#methode pour gagner de PV
 		@dice_health = rand(1..6)
 
-		if @dice_health = 1
+		if @dice_health == 1
 			puts "Tu n'as rien trouvé"
 		end
 
-		if @dice >= 2 && @dice <= 5 && @life_points < 100
+		if @dice_health >= 2 && @dice_health <= 5
+		 	if @life_points == 100
+				puts "tu as le nombre maximum de point de vie"
+			end
 		 	if @life_points <= 50
-		 		@life_points = @life_points +50
+		 		@life_points = @life_points + 50
+		 		puts "Bravo ! tu as trouvé un pack de +50 points de vie"
 		 	end
 			if @life_points > 50
-		 		@life_points = @life_points + (100 -@life_points)
+		 		@life_points = 100
+				puts "Bravo ! tu as trouvé un pack de +50 points de vie"
 		 	end
-			puts "Bravo ! tu as trouvé un pack de +50 points de vie"
+		 				
 		end
 
-		if @dice_health = 6
+		if @dice_health == 6
 			if @life_points <= 20
-		 		@life_points = @life_points +50
+		 		@life_points = @life_points + 80
 		 	end
 			if @life_points > 20
-		 		@life_points = @life_points + (100 -@life_points)
+		 		@life_points = 100
 			end
 			puts "Waoooow, tu as trouvé un pack de +80 points de vie"
 		end
